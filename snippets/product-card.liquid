@@ -1,3 +1,88 @@
 {% comment %}
   Product Card Snippet
 {% endcomment %}
+
+{%- liquid
+  assign show_rating = show_rating | default: true
+  assign show_price = show_price | default: true
+-%}
+
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card__link">
+    {% comment %} Image Wrapper {% endcomment %}
+    <div class="product-card__image-wrapper">
+      {%- if product.featured_media -%}
+        {%- assign image_size = '533x' -%}
+        <img
+          src="{{ product.featured_media | img_url: image_size, crop: 'center' }}"
+          alt="{{ product.featured_media.alt | escape }}"
+          class="product-card__image"
+          width="{{ product.featured_media.width }}"
+          height="{{ product.featured_media.height }}"
+          loading="lazy"
+        >
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'product-card__image placeholder' }}
+      {%- endif -%}
+    </div>
+
+    {% comment %} Product Info {% endcomment %}
+    <div class="product-card__info">
+      {% comment %} Rating {% endcomment %}
+      {%- if show_rating -%}
+        <div class="product-card__rating">
+          <div class="product-card__stars">
+            {%- if show_rating and product.metafields.reviews.rating.value != blank -%}
+              <span class="product-card__star">
+                {%- for i in (1..product.metafields.reviews.rating.value.rating) -%}
+                  ★
+                {%- endfor -%}
+              </span>
+            {%- else -%}
+              <span class="product-card__placeholder">★★★★★</span>
+            {%- endif -%}
+          </div>
+          <span class="product-card__reviews-count">
+            {%- if show_rating and product.metafields.reviews.rating_count > 0 -%}
+              ({{ product.metafields.reviews.rating_count }})
+            {%- else -%}
+              (0)
+            {%- endif -%}
+          </span>
+        </div>
+      {%- endif -%}
+
+      {% comment %} Product Title {% endcomment %}
+      <h3 class="product-card__title">{{ product.title }}</h3>
+
+      {% comment %} Product Price {% endcomment %}
+      {% if show_price %}
+        <div class="product-card__price">
+          {% if product.compare_at_price > product.price %}
+            <span class="product-card__price--sale">
+              {{ product.price | money_without_currency -}}
+              {{- cart.currency.symbol }}
+            </span>
+            <span class="product-card__price--compare">
+              {{ product.compare_at_price | money_without_currency -}}
+              {{- cart.currency.symbol }}
+            </span>
+          {% else %}
+            <span class="product-card__price--regular">
+              {% if product.price_varies %}
+                <small class="product-card__price-from">
+                  {{- 'products.product.price.from_price_html' | t: price: '' -}}
+                </small>
+                {{- product.price | money_without_currency -}}
+                {{- cart.currency.symbol }}
+              {% else %}
+                {{ product.price | money_without_currency -}}
+                {{- cart.currency.symbol }}
+              {% endif %}
+            </span>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </a>
+</div>

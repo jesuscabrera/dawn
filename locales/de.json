@@ -123,7 +123,7 @@
         "max_of": "Höchstens {{ quantity }}"
       },
       "price": {
-        "from_price_html": "Von {{ price }}",
+        "from_price_html": "ab {{ price }}",
         "regular_price": "Normaler Preis",
         "sale_price": "Verkaufspreis",
         "unit_price": "Grundpreis"

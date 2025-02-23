@@ -2,3 +2,115 @@
   Product Slider Section
   - Uses Swiper.js for slider functionality
 {% endcomment %}
+
+{% comment %} Load styles and scripts {% endcomment %}
+{{ 'product-slider.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-slider.js' | asset_url }}" defer></script>
+
+{% comment %} Section it only render if a collection is selected and has products {% endcomment %}
+{%- if section.settings.collection != blank and collections[section.settings.collection].products.size > 0 -%}
+  <section
+    class="product-slider"
+    aria-labelledby="product-slider-title"
+  >
+    <div class="product-slider__container">
+      {% comment %} Swiper slider Title {% endcomment %}
+      <h2 class="product-slider__title">
+        {{- section.settings.title | default: section.settings.collection | escape -}}
+      </h2>
+
+      {% comment %} slider container {% endcomment %}
+      <div
+        class="swiper product-slider__swiper"
+        role="region"
+        aria-label="{{ section.settings.title | escape }} products carousel"
+        tabindex="0"
+        aria-live="polite"
+      >
+        <div class="swiper-wrapper">
+          {%- for product in collections[section.settings.collection].products
+            limit: section.settings.products_to_show
+          -%}
+            {%- if product.available -%}
+              <div
+                class="swiper-slide product-slider__item"
+                role="group"
+                {% comment %} Debugging or tracking {% endcomment %}
+                data-id="{{ section.settings.collection }}-{{ product.id }}"
+                aria-label="slide {{ forloop.index }} of {{ section.settings.products_to_show }}"
+                aria-roledescription="product"
+              >
+                {% render 'product-card', product: product, show_rating: section.settings.show_rating %}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+      {% comment %} Navigation buttons (hidden on small screens) {% endcomment %}
+      <nav class="product-slider__navigation" aria-label="Slider navigation">
+        <button
+          class="swiper-button-prev"
+          aria-label="Previous slide"
+          type="button"
+        >
+          <span class="visually-hidden">Previous products</span>
+        </button>
+        <button
+          class="swiper-button-next"
+          aria-label="Next slide"
+          type="button"
+        >
+          <span class="visually-hidden">Next products</span>
+        </button>
+      </nav>
+
+      {% comment %} Pagination dots (hidden on large screens) {% endcomment %}
+      <div class="swiper-pagination" role="navigation" aria-label="Slide pagination"></div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% comment %} Section settings (editable in Shopify Theme Editor) {% endcomment %}
+{% schema %}
+{
+  "name": "Product Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "BESTSELLERS"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 5,
+      "max": 24,
+      "step": 1,
+      "default": 8,
+      "label": "Number of products to show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show product rating",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Slider",
+      "settings": {
+        "title": "BESTSELLERS",
+        "products_to_show": 8,
+        "show_rating": true
+      }
+    }
+  ]
+}
+{% endschema %}
