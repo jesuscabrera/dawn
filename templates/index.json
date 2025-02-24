@@ -89,7 +89,11 @@
     },
     "product_slider": {
       "type": "product-slider",
-      "settings": {}
+      "settings": {
+        "title": "Bestsellers",
+        "products_to_show": 8,
+        "show_rating": true
+      }
     },
     "collage": {
       "type": "collage",
