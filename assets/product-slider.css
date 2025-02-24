@@ -13,14 +13,14 @@
   --slider-color-secondary: #eef2f5;
   --slider-color-background: #fff;
   --slider-color-text: #000;
-  --slider-color-button-bg: white;
+  --slider-color-button-background: #fff;
   --slider-color-button-text: #004f9f;
   --slider-color-button-border: #004f9f;
   --slider-color-highlight: #004f9f;
   --slider-color-price-sale: #ff4814;
   --slider-color-price-compare: #c8c8c8;
   --slider-color-accent: #ffa800;
-  --slider-color-border: #c8c8c8;
+  --slider-color-light: #c8c8c8;
 
   /* Typography */
   --slider-font-heading-size: clamp(20px, 2vw, 26px); /* Responsive Font Size */
@@ -58,7 +58,7 @@
 /* Product Slider */
 .product-slider {
   overflow: hidden;
-  background: var(--slider-color-primary);
+  background: var(--slider-color-secondary);
   color: var(--slider-color-text);
 }
 
@@ -201,15 +201,33 @@
   font-size: var(--product-card-star-size);
 }
 
-.product-card__reviews-count {
-  font-size: var(--slider-font-body-size);
-  color: var(--slider-color-border);
-  margin-left: var(--slider-spacing-sm);
+.product-card__half-star {
+  font-size: var(--product-card-star-size);
+  background: linear-gradient(90deg, var(--slider-color-accent) 50%, var(--slider-color-button-background) 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px var(--slider-color-accent);
+  display: inline-block;
 }
 
 .product-card__placeholder {
   font-size: var(--product-card-star-size);
-  color: var(--slider-color-border);
+  -webkit-text-fill-color: var(--slider-color-button-background);
+  -webkit-text-stroke: 1px var(--slider-color-accent);
+}
+
+/* Fallback for browsers without -webkit-text-fill-color support (e.g., Firefox) - Consider the use of svg icons */
+@supports not (-webkit-text-fill-color: transparent) {
+  .product-card__placeholder,
+  .product-card__half-star {
+    color: var(--slider-color-light);
+  }
+}
+
+.product-card__reviews-count {
+  font-size: var(--slider-font-body-size);
+  color: var(--slider-color-light);
+  margin-left: var(--slider-spacing-sm);
 }
 
 /* Product Pricing */
@@ -274,7 +292,7 @@
     margin: 0;
     width: var(--slider-nav-button-size);
     height: var(--slider-nav-button-size);
-    background-color: var(--slider-color-button-bg);
+    background-color: var(--slider-color-button-background);
     color: var(--slider-color-button-text);
     border: var(--slider-nav-border-size) solid var(--slider-color-button-border);
     border-radius: var(--slider-border-radius);

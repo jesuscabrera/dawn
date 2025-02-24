@@ -11,7 +11,7 @@
 {%- if section.settings.collection != blank and collections[section.settings.collection].products.size > 0 -%}
   <section
     class="product-slider"
-    aria-labelledby="product-slider-title"
+    aria-label="{{ section.settings.title | escape }}"
   >
     <div class="product-slider__container">
       {% comment %} Swiper slider Title {% endcomment %}
@@ -23,7 +23,7 @@
       <div
         class="swiper product-slider__swiper"
         role="region"
-        aria-label="{{ section.settings.title | escape }} products carousel"
+        aria-label="{{ section.settings.title | escape }} slider"
         tabindex="0"
         aria-live="polite"
       >
