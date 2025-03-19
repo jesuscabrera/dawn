@@ -1,0 +1,96 @@
+/* CUSTOM PRODUCT PAGE CSS
+   Load Font from a CDN for development (faster & always updated) 
+   Consider hosting Font files locally in Shopify's assets for production stability
+   Internet Explorer does not support CSS Variables - DAWN Theme also does not support IE
+   Import Source Sans 3 Variable Font 
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200..900&display=swap');
+
+/* 
+   ===============================
+   GLOBAL STYLES
+   ===============================
+   ▸ Included in each file during development for easy reference.
+   ▸ Move these styles to a dedicated global stylesheet (e.g., custom-base.css or custom-global.css) in production.
+   ▸ Helps improve maintainability and performance by reducing redundant styles.
+*/
+
+/* Theme Colors */
+:root {
+  --custom-color-primary: #004f9f;
+  --custom-color-secondary: #eef2f5;
+  --custom-color-background: #fff;
+  --custom-color-text: #000;
+  --custom-color-button-background: #fff;
+  --custom-color-button-text: #004f9f;
+  --custom-color-button-border: #004f9f;
+  --custom-color-highlight: #004f9f;
+  --custom-color-price-sale: #ff4814;
+  --custom-color-price-compare: #c8c8c8;
+  --custom-color-accent: #ffa800;
+  --custom-color-light: #c8c8c8;
+
+  /* Typography */
+  --custom-font-heading-size: clamp(20px, 2vw, 26px); /* Responsive Font Size */
+  --custom-font-heading-line-height: clamp(28px, 2vw, 34px); /* Responsive Line Height */
+  --custom-font-heading-weight: 600;
+  --custom-font-body-size: clamp(14px, 2vw, 16px);
+  --custom-font-body-line-height: clamp(22px, 1.5vw, 24px);
+  --custom-font-body-weight: 400;
+  --custom-font-family: 'Source Sans 3', 'Segoe UI', 'Helvetica Neue', sans-serif;
+  --custom-font-body-weight-light: 200;
+
+  /* Layout & Spacing */
+  --custom-container-width: 1440px;
+  --custom-spacing-xs: 4px;
+  --custom-spacing-sm: 8px;
+  --custom-spacing-md: 12px;
+  --custom-spacing-lg: 24px;
+  --custom-spacing-xl: clamp(48px, 4vw, 60px);
+
+  /* Component Dimensions */
+  --custom-nav-button-size: 48px;
+  --custom-nav-button-bg-size: 24px;
+  --custom-nav-border-size: 1px;
+  --custom-card-image-size: clamp(160px, 20vw, 240px);
+  --custom-card-star-size: 22px;
+  --slider-product-card-title-height: 68px;
+  --swiper-pagination-bullet-size: 8px;
+
+  /* Navigation */
+  --product-slider-navigation-top: 52px;
+
+  /* Border Radius */
+  --custom-border-radius: 2px;
+}
+
+/* 
+===============================
+GENERAL STYLES
+===============================
+*/
+
+.page-width {
+  max-width: var(--custom-container-width);
+  margin: 0 auto;
+  padding: 0 var(--custom-spacing-lg);
+}
+
+/* 
+===============================
+GENERAL MEDIA QUERIES STYLES
+===============================
+*/
+
+@media screen and (max-width: 989px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .hide-on-desktop {
+    display: none !important;
+  }
+}

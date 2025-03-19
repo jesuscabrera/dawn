@@ -1,0 +1,63 @@
+{{ 'top-bar-menu.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="section__top-bar-menu hide-on-mobile"
+>
+  <div class="top-bar-menu">
+    <div class="top-bar-menu__left">
+      {% if section.settings.left_menu != blank %}
+        <ul class="top-bar-menu__list">
+          {% for link in section.settings.left_menu.links %}
+            <li class="top-bar-menu__item">
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="top-bar-menu__right">
+      {% if section.settings.right_menu != blank %}
+        <div class="dropdown">
+          <button class="dropdown-btn">{{ section.settings.menu_title }} ▾</button>
+          <ul class="dropdown-content">
+            {% for link in section.settings.right_menu.links %}
+              <li class="dropdown-item">
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Top Bar Menu",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "left_menu",
+      "label": "Select Left Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "right_menu",
+      "label": "Select Right Dropdown Menu"
+    },
+    {
+      "type": "text",
+      "id": "menu_title",
+      "label": "Menu Title",
+      "default": "Service / Hilfe"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Menu"
+    }
+  ]
+}
+{% endschema %}

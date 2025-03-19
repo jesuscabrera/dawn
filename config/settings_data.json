@@ -1,8 +1,10 @@
 {
   "current": "Default",
+  "logo": "shopify://shop_images/logo.png",
+  "logo_width": 280,
   "presets": {
     "Default": {
-      "logo_width": 90,
+      "logo_width": 280,
       "color_schemes": {
         "scheme-1": {
           "settings": {

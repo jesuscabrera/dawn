@@ -1,0 +1,72 @@
+.section__top-bar-menu {
+  background: var(--custom-color-secondary);
+}
+.top-bar-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--custom-spacing-sm) var(--custom-spacing-lg);
+  max-width: var(--custom-container-width);
+  margin: 0 auto;
+}
+
+.top-bar-menu__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: var(--custom-spacing-lg);
+}
+
+.top-bar-menu__item {
+  display: inline-block;
+}
+
+.top-bar-menu__item a {
+  text-decoration: none;
+  color: var(--custom-color-text);
+}
+
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background: none;
+  border: none;
+  font-size: var(--custom-font-body-size);
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: white;
+  min-width: 150px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  list-style: none;
+  padding: 10px;
+}
+
+.dropdown-item {
+  padding: var(--custom-spacing-sm) var(--custom-spacing-md);
+}
+
+.dropdown-item a {
+  text-decoration: none;
+  color: var(--custom-color-text);
+  display: block;
+}
+
+.dropdown-item a:hover {
+  background: var(--custom-color-light);
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
