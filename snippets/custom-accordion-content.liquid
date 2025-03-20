@@ -1,0 +1,13 @@
+{% comment %}
+  This snippet handles the accordion content logic.
+  It checks if the heading is "reviews" and loads the Judgeme widget,
+  otherwise, it displays the regular row content.
+{% endcomment %}
+
+{% if block.settings.heading == 'reviews' %}
+  <div class="jdgm-widget jdgm-review-widget" data-id="{{ product.id }}">
+    {{ product.metafields.judgeme.widget }}
+  </div>
+{% else %}
+  {{ block.settings.row_content }}
+{% endif %}

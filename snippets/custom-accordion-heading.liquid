@@ -1,0 +1,14 @@
+{% comment %}
+  This snippet handles the display of the accordion heading.
+  It allows translation and customization for specific headings.
+{% endcomment %}
+
+{% if block.settings.heading == 'description' %}
+  {{ 'products.product.description' | t }}
+{% elsif block.settings.heading == 'characteristics' %}
+  {{ 'products.product.characteristics' | t }}
+{% elsif block.settings.heading == 'reviews' %}
+  {{ 'products.product.reviews' | t }}
+{% else %}
+  {{ block.settings.heading | default: block.settings.page.title | escape }}
+{% endif %}

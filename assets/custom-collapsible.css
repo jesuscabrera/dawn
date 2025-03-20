@@ -1,0 +1,49 @@
+/*
+   ===============================
+   CUSTOM COLLAPSIBLE 
+   ===============================
+
+   STYLES OVERRIDE
+   
+   This file contains custom styles that override the default 
+   collapsible component styles. These styles are applied on top 
+   of the existing structure and do not follow the BEM convention 
+   strictly, as they modify predefined classes rather than 
+   adhering to a block-element-modifier structure.
+
+   The primary purpose of this stylesheet is to adjust the appearance 
+   and behavior of the collapsible component to match the design 
+   requirements without refactoring the existing markup.
+
+   ===============================
+*/
+
+.custom-product-collapsible .collapsible-content-wrapper-narrow {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 100%;
+}
+
+.custom-product-collapsible.collapsible-content summary:hover {
+  background: var(--custom-color-background);
+}
+
+.custom-product-collapsible .accordion__title {
+  font-size: var(--custom-font-heading-size);
+  font-weight: var(--custom-font-heading-weight);
+  text-transform: uppercase;
+}
+
+.custom-product-collapsible.collapsible-content .accordion {
+  border-top: 0;
+}
+
+.custom-product-collapsible summary:hover .accordion__title {
+  text-decoration: none;
+}
+
+.custom-product-collapsible h2 {
+  color: var(--custom-color-primary);
+  font-size: var(--custom-font-body-size);
+  font-weight: var(--custom-font-heading-weight);
+}
