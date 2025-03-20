@@ -1,0 +1,52 @@
+/* 
+   ===============================
+   PRODUCT TABS SLIDER
+   ===============================
+*/
+
+.product-tabs-slider {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--custom-spacing-lg);
+}
+
+.product-tabs-slider__tabs {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: var(--custom-spacing-lg);
+}
+
+.product-tabs-slider__tabs .tab {
+  color: var(--custom-color-light);
+  background: transparent;
+  border: none;
+  padding: 10px 50px 0 0;
+  margin: 0;
+  font-size: var(--custom-font-heading-size);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product-tabs-slider__tabs .tab.active {
+  color: var(--custom-color-primary);
+  font-weight: var(--custom-font-heading-weight);
+}
+
+.product-tabs-slider__content {
+  position: relative;
+}
+
+.tab-content {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tab-content.active {
+  display: block;
+  opacity: 1;
+}
+
+.product-tabs-slider .product-slider__navigation {
+  transform: translate(25px, -125px);
+}

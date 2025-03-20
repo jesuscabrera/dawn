@@ -1,0 +1,153 @@
+{% comment %}
+  Product Tabs Slider Section
+  - Uses Swiper.js for slider functionality
+  - Wraps two product sliders inside a tab system
+  - Supports multiple instances on the same page
+{% endcomment %}
+
+{{ 'product-slider.css' | asset_url | stylesheet_tag }}
+{{ 'product-tabs-slider.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-tabs-slider.js' | asset_url }}" defer></script>
+
+<!-- Load Swiper.js from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+
+{% assign section_id = section.id %}
+
+<section
+  class="product-tabs-slider product-slider {% if section.settings.enable_hide_on_mobile %}hide-on-mobile{% endif %}"
+  data-section-id="{{ section_id }}"
+>
+  <!-- Tabs Navigation -->
+
+  <div class="product-tabs-slider__tabs">
+    <button class="tab active" data-tab="tab1-{{ section_id }}">{{ section.settings.tab1_title }}</button>
+    <button class="tab" data-tab="tab2-{{ section_id }}">{{ section.settings.tab2_title }}</button>
+  </div>
+
+  <!-- Tabs Content -->
+  <div class="product-tabs-slider__content">
+    <!-- First Product Slider -->
+    <div id="tab1-{{ section_id }}" class="tab-content active">
+      {% if section.settings.collection_1 != blank %}
+        <div class="swiper product-slider swiper-tab1-{{ section_id }}">
+          <div class="swiper-wrapper">
+            {%- for product in collections[section.settings.collection_1].products
+              limit: section.settings.products_to_show
+            -%}
+              <div class="swiper-slide">
+                {% render 'product-card', product: product %}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {% endif %}
+      <!-- Navigation for first slider -->
+      <nav class="product-slider__navigation" data-slider="tab1-{{ section_id }}" aria-label="Slider navigation">
+        <button
+          id="prev-tab1-{{ section_id }}"
+          class="swiper-button-prev"
+          aria-label="Previous slide"
+          type="button"
+        >
+          <span class="visually-hidden">Previous products</span>
+        </button>
+        <button
+          id="next-tab1-{{ section_id }}"
+          class="swiper-button-next"
+          aria-label="Next slide"
+          type="button"
+        >
+          <span class="visually-hidden">Next products</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Second Product Slider -->
+    <div id="tab2-{{ section_id }}" class="tab-content">
+      {% if section.settings.collection_2 != blank %}
+        <div class="swiper product-slider swiper-tab2-{{ section_id }}">
+          <div class="swiper-wrapper">
+            {%- for product in collections[section.settings.collection_2].products
+              limit: section.settings.products_to_show
+            -%}
+              <div class="swiper-slide">
+                {% render 'product-card', product: product %}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {% endif %}
+      <!-- Navigation for second slider -->
+      <nav class="product-slider__navigation" data-slider="tab2-{{ section_id }}" aria-label="Slider navigation">
+        <button
+          id="prev-tab2-{{ section_id }}"
+          class="swiper-button-prev"
+          aria-label="Previous slide"
+          type="button"
+        >
+          <span class="visually-hidden">Previous products</span>
+        </button>
+        <button
+          id="next-tab2-{{ section_id }}"
+          class="swiper-button-next"
+          aria-label="Next slide"
+          type="button"
+        >
+          <span class="visually-hidden">Next products</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Tabs Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tab1_title",
+      "label": "Tab 1 Title",
+      "default": "Featured Products"
+    },
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Collection for Tab 1"
+    },
+    {
+      "type": "text",
+      "id": "tab2_title",
+      "label": "Tab 2 Title",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Collection for Tab 2"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Number of Products",
+      "min": 2,
+      "max": 12,
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_hide_on_mobile",
+      "label": "Hide on Mobile",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Tabs Slider",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}
