@@ -4,6 +4,7 @@
 {{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+{{ 'custom-footer.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .footer {
@@ -51,24 +52,29 @@
     {%- unless only_empty_brand -%}
       <div class="footer__content-top page-width">
         {%- if section.blocks.size > 0 -%}
-          {%- liquid
-            if section.blocks.size == 9
-              assign footer_grid_class = 'grid--3-col-tablet'
-            elsif section.blocks.size > 6
-              assign footer_grid_class = 'grid--4-col-desktop'
-            elsif section.blocks.size > 4
-              assign footer_grid_class = 'grid--3-col-tablet'
-            endif
-          -%}
+          {% comment %}
+            Changed the structure of the footer blocks to adapt to the new design.
+            This code can be commented out if the old design is needed.
+            The reference to this code is also commented on the elements that are affected by this change.
+             {%- liquid
+               if section.blocks.size == 9
+                 assign footer_grid_class = 'grid--3-col-tablet'
+               elsif section.blocks.size > 6
+                 assign footer_grid_class = 'grid--4-col-desktop'
+               elsif section.blocks.size > 4
+                 assign footer_grid_class = 'grid--3-col-tablet'
+               endif
+             -%}
+          {% endcomment %}
           <div
-            class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            class="footer__blocks-wrapper{% comment %}grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% endcomment %} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
             {% if settings.animations_reveal_on_scroll %}
               data-cascade
             {% endif %}
           >
             {%- for block in section.blocks -%}
               <div
-                class="footer-block grid__item{% if block.type == 'link_list' %} footer-block--menu{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                class="footer-block {% comment %}grid__item{% endcomment %}{% if block.type == 'link_list' %} footer-block--menu{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                 {{ block.shopify_attributes }}
                 {% if settings.animations_reveal_on_scroll %}
                   data-cascade
@@ -158,22 +164,49 @@
             {%- endfor -%}
           </div>
         {%- endif -%}
-
         <div
-          class="footer-block--newsletter{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          class="footer__blocks-wrapper-row-2 {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
           {% if settings.animations_reveal_on_scroll %}
             data-cascade
           {% endif %}
         >
-          {%- if section.settings.newsletter_enable -%}
-            <div class="footer-block__newsletter">
-              {%- if section.settings.newsletter_heading != blank -%}
-                <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
-              {%- endif -%}
-              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
-                <input type="hidden" name="contact[tags]" value="newsletter">
-                <div class="newsletter-form__field-wrapper">
-                  <div class="field">
+          {%- if section.settings.certifications_enable -%}
+            <div class="certifications_icons hide-on-desktop">
+              <h2 class="footer-block__heading certification__heading inline-richtext">
+                {{ section.settings.certifications_heading | default: 'Zertifiziert durch:' }}
+              </h2>
+              <ul class="list list-certification list-payment" role="list">
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'certification_image' and block.settings.image != blank -%}
+                    <li class="list-certification__item list-payment__item">
+                      <img
+                        src="{{ block.settings.image | image_url: width: 60 }}"
+                        alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                        class="certification-icon"
+                        width="100%"
+                        height="100%"
+                        loading="lazy"
+                      >
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+          <div
+            class="custom footer-block--newsletter{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+            {% endif %}
+          >
+            {%- if section.settings.newsletter_enable -%}
+              <div class="footer-block__newsletter">
+                {%- if section.settings.newsletter_heading != blank -%}
+                  <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
+                {%- endif -%}
+                {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <div class="newsletter-form__field-wrapper ">
                     <input
                       id="NewsletterForm--{{ section.id }}"
                       type="email"
@@ -197,16 +230,15 @@
                     <label class="field__label" for="NewsletterForm--{{ section.id }}">
                       {{ 'newsletter.label' | t }}
                     </label>
+
                     <button
                       type="submit"
-                      class="newsletter-form__button field__button"
+                      class="button button--primary newsletter-form__submit"
                       name="commit"
                       id="Subscribe"
                       aria-label="{{ 'newsletter.button_label' | t }}"
                     >
-                      <span class="svg-wrapper">
-                        {{- 'icon-arrow.svg' | inline_asset_content -}}
-                      </span>
+                      <span>{{ 'newsletter.button_label' | t }}</span>
                     </button>
                   </div>
                   {%- if form.errors -%}
@@ -218,23 +250,78 @@
                       {{ form.errors.messages.email -}}
                     </small>
                   {%- endif -%}
-                </div>
-                {%- if form.posted_successfully? -%}
-                  <h3
-                    class="newsletter-form__message newsletter-form__message--success form__message"
-                    id="ContactFooter-success"
-                    tabindex="-1"
-                    autofocus
-                  >
-                    <span class="svg-wrapper">
-                      {{- 'icon-success.svg' | inline_asset_content -}}
-                    </span>
-                    {{- 'newsletter.success' | t }}
-                  </h3>
+
+                  {%- if form.posted_successfully? -%}
+                    <h3
+                      class="newsletter-form__message newsletter-form__message--success form__message"
+                      id="ContactFooter-success"
+                      tabindex="-1"
+                      autofocus
+                    >
+                      <span class="svg-wrapper">
+                        {{- 'icon-success.svg' | inline_asset_content -}}
+                      </span>
+                      {{- 'newsletter.success' | t }}
+                    </h3>
+                  {%- endif -%}
+                {%- endform -%}
+                {%- if section.settings.newsletter_subtext != blank -%}
+                  <h3 class="footer-block__subtext inline-richtext">{{ section.settings.newsletter_subtext }}</h3>
                 {%- endif -%}
-              {%- endform -%}
-            </div>
-          {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="footer-payment-certification-wrapper">
+            {%- if section.settings['payment_top-footer_enable'] -%}
+              <div class="payment_icons">
+                <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+                <ul class="list list-payment" role="list">
+                  {%- for type in shop.enabled_payment_types -%}
+                    <li class="list-payment__item">
+                      {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                    </li>
+                  {%- endfor -%}
+
+                  {%- if section.settings.show_shipping_icon -%}
+                    <li class="list-payment__item">
+                      <img
+                        src="{{ 'shipping.png' | asset_url }}"
+                        alt="sections footer shiping icon"
+                        class="icon icon--full-color"
+                        width="80"
+                        height="24"
+                        loading="lazy"
+                      >
+                    </li>
+                  {%- endif -%}
+                </ul>
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.certifications_enable -%}
+              <div class="certifications_icons hide-on-mobile">
+                <h2 class="footer-block__heading certification__heading inline-richtext">
+                  {{ section.settings.certifications_heading | default: 'Zertifiziert durch:' }}
+                </h2>
+                <ul class="list list-certification list-payment" role="list">
+                  {%- for block in section.blocks -%}
+                    {%- if block.type == 'certification_image' and block.settings.image != blank -%}
+                      <li class="list-certification__item list-payment__item">
+                        <img
+                          src="{{ block.settings.image | image_url: width: 60 }}"
+                          alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                          class="certification-icon"
+                          width="100%"
+                          height="100%"
+                          loading="lazy"
+                        >
+                      </li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+          </div>
 
           {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
             <div class="footer__follow-on-shop">
@@ -299,10 +386,11 @@
     </div>
     <div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center{% endif %}">
       <div class="footer__copyright caption">
+        <p class="copyright__content">{{ section.settings.copy_text }}</p>
         <small class="copyright__content"
           >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
         </small>
-        <small class="copyright__content">{{ powered_by_link }}</small>
+        <small class="copyright__content"> {{ section.settings['copy-allrights_text'] }}</small>
         {%- if section.settings.show_policy -%}
           <ul class="policies list-unstyled">
             {%- for policy in shop.policies -%}
@@ -426,6 +514,23 @@
           "default": "center"
         }
       ]
+    },
+    {
+      "type": "certification_image",
+      "name": "Certification",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Certification image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Image alt text",
+          "info": "Describe the certification for screen readers"
+        }
+      ]
     }
   ],
   "settings": [
@@ -451,6 +556,24 @@
       "id": "newsletter_heading",
       "default": "t:sections.footer.settings.newsletter_heading.default",
       "label": "t:sections.footer.settings.newsletter_heading.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "newsletter_subtext",
+      "default": "Subtext",
+      "label": "Subtext"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "copy_text",
+      "default": "copytext",
+      "label": "copytext"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "copy-allrights_text",
+      "default": "All rights reserved.",
+      "label": "copy Allrights Text"
     },
     {
       "type": "header",
@@ -498,6 +621,23 @@
     },
     {
       "type": "header",
+      "content": "Certifications"
+    },
+    {
+      "type": "checkbox",
+      "id": "certifications_enable",
+      "default": true,
+      "label": "Show certifications-icons"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "certifications_heading",
+      "default": "Zertifiziert durch:",
+      "label": "Certifications heading"
+    },
+
+    {
+      "type": "header",
       "content": "t:sections.footer.settings.header__7.content"
     },
     {
@@ -505,6 +645,19 @@
       "id": "payment_enable",
       "default": true,
       "label": "t:sections.footer.settings.payment_enable.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_top-footer_enable",
+      "default": true,
+      "label": "Show top-footer payment-icons"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping_icon",
+      "default": true,
+      "label": "Show shipping icon",
+      "info": "Displays the shipping icon alongside payment methods"
     },
     {
       "type": "header",

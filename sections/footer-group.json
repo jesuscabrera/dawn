@@ -5,41 +5,73 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "footer-0": {
-          "type": "link_list",
+        "image": {
+          "type": "image",
           "settings": {
-            "heading": "Quick links",
-            "menu": "footer"
-          }
-        },
-        "footer-1": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Info",
-            "menu": "footer"
+            "image": "shopify://shop_images/logo.png",
+            "image_width": 280,
+            "alignment": ""
           }
         },
         "footer-2": {
           "type": "text",
           "settings": {
-            "heading": "Our mission",
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+            "heading": "<strong>Kontakt:</strong>",
+            "subtext": "<p><a href=\"tel:0881-9258600\">0881-9258600</a><a href=\"mailto:info@kommondo.de\"><br/>info@kommondo.de</a></p>"
+          }
+        },
+        "footer-3": {
+          "type": "text",
+          "settings": {
+            "heading": "<strong>Oder per Whatsapp:</strong>",
+            "subtext": "<p><a href=\"https://wa.me/01705798830\" title=\"whats up link \">01705798830</a></p>"
+          }
+        },
+        "certification_image_1": {
+          "type": "certification_image",
+          "settings": {
+            "image": "shopify://shop_images/certification-1.png",
+            "title": "Certification image 1"
+          }
+        },
+        "certification_image_2": {
+          "type": "certification_image",
+          "settings": {
+            "image": "shopify://shop_images/certification-2.png",
+            "title": "Certification image 2"
+          }
+        },
+        "certification_image_3": {
+          "type": "certification_image",
+          "settings": {
+            "image": "shopify://shop_images/certification-3.png",
+            "title": "Certification Image 3"
           }
         }
       },
       "block_order": [
-        "footer-0",
-        "footer-1",
-        "footer-2"
+        "image",
+        "footer-2",
+        "footer-3",
+        "certification_image_1",
+        "certification_image_2",
+        "certification_image_3"
       ],
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_heading": "Für Fachinformationen anmelden: exklusive, kostenlose Informationen für Mitglieder erhalten. Attraktive Sonderkonditionen. Innovative Aktionen.",
+        "newsletter_subtext": "Ich habe die <a href=\"https://www.kommondo.de/search?q=#\">Datenschutzbestimmungen</a> zur Kenntnis genommen.",
+        "copy_text": "Onlineshop für B2B und B2G Kunden. * Alle Preise rein netto zzgl. der aktuell gesetzlich gültiger Mehrwertsteuer. Fracht zzgl. 9 % vom Netto-Auftragswert und ggf. Nachnahmegebühren, wenn nicht anders angegeben.",
+        "enable_follow_on_shop": true,
         "show_social": true,
         "enable_country_selector": false,
         "enable_language_selector": false,
-        "payment_enable": true,
+        "certifications_enable": true,
+        "certifications_heading": "Zertifiziert durch:",
+        "payment_enable": false,
+        "payment_top-footer_enable": true,
+        "show_shipping_icon": true,
         "show_policy": false,
         "margin_top": 48,
         "padding_top": 36,
@@ -47,7 +79,5 @@
       }
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["footer"]
 }

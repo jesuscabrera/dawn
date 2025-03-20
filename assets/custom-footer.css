@@ -1,0 +1,114 @@
+/* 
+   ===============================
+   CUSTOM FOOTER 
+   ===============================
+*/
+
+#Subscribe {
+  background-color: var(--custom-color-primary);
+  border: solid 2px var(--custom-color-primary);
+}
+
+.newsletter-form__field-wrapper .field__input {
+  border: solid 1px;
+}
+
+@media screen and (max-width: 989px) {
+  .footer-block-image {
+    justify-content: left;
+  }
+  .custom .newsletter-form__field-wrapper {
+    max-width: 100%;
+    display: flex;
+    gap: var(--custom-spacing-sm);
+    flex-direction: column;
+  }
+  .custom .newsletter-form {
+    max-width: 100%;
+  }
+}
+
+.footer-block__heading {
+  text-align: left;
+}
+
+.list-payment {
+  justify-content: left;
+}
+
+.footer__blocks-wrapper-row-2 .certifications_icons {
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 990px) {
+  .custom .newsletter-form__field-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 100%;
+  }
+  .custom .newsletter-form {
+    margin: 0;
+    max-width: 100%;
+  }
+  .footer__blocks-wrapper-row-2 .footer-block--newsletter {
+    align-items: flex-start;
+    margin-top: 0;
+    padding-right: 25%;
+  }
+  .footer__blocks-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer__blocks-wrapper-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .footer-payment-certification-wrapper {
+    display: grid;
+    grid-template-rows: auto;
+    gap: 40px;
+  }
+
+  .footer__blocks-wrapper .footer-block__heading {
+    margin-bottom: var(--custom-product-spacing-sm);
+  }
+  .footer__blocks-wrapper-row-2 .certifications_icons {
+    margin-top: 0;
+  }
+}
+
+.list-certification {
+  padding-left: 0;
+}
+
+.certification__heading {
+  font-weight: var(--custom-font-heading-weight);
+}
+
+.footer-block__subtext {
+  font-size: var(--custom-font-body-size-sm);
+  text-align: left;
+  margin: var(--custom-spacing-xs);
+  color: var(--custom-color-light);
+}
+
+.footer__content-bottom {
+  padding-top: 0;
+}
+
+.copyright__content,
+.footer__copyright {
+  text-align: center;
+  font-size: var(--custom-font-body-size);
+  color: var(--custom-color-light);
+}
+
+.footer-payment-certification-wrapper {
+  position: relative;
+  width: 100%;
+}
