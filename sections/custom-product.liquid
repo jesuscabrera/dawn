@@ -1,7 +1,7 @@
 {% comment %}
   Custom Product Page for Shopify Theme
 
-  - Copied the original `product.liquid` and created `custom-product.liquid` to adapt the product
+  - Copied the original `main-product.liquid` and created `custom-product.liquid` to adapt the product
     page layout and styling according to the provided design specifications.
   - This approach follows Shopify best practices by:
     - Keeping the original product template intact for maintainability and future updates.
@@ -11,11 +11,9 @@
     - Introduced a new wrapper `custom-product` to isolate styling changes.
     - Added `section-custom-product.css` for custom styles.
     - Replaced default price rendering with `custom-price` to adapt the price display.
-    - Modified product structure for improved accessibility and layout consistency.
     - Updated the product media gallery layout and behavior.
     - Applied custom styling and structure to the quantity selector and buy buttons.
-    - Implemented a new product grouping picker for better variant organization.
-    - Enhanced rating display with a more visual representation using stars.
+    - Implemented a new product grouping picker for display variants based on metafields and a product grouping.
     - Introduced a custom product summary section for order details.
 
   This ensures a clean, modular, and scalable customization while maintaining compatibility
