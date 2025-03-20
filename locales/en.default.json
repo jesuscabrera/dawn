@@ -110,6 +110,8 @@
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",
       "description": "Description",
+      "characteristics": "characteristics",
+      "reviews": "reviews",
       "inventory_in_stock": "In stock",
       "inventory_in_stock_show_count": "{{ quantity }} in stock",
       "inventory_low_stock": "Low stock",
@@ -117,6 +119,7 @@
       "inventory_out_of_stock": "Out of stock",
       "inventory_out_of_stock_continue_selling": "In stock",
       "sku": "SKU",
+      "product_nummer": "Product number",
       "on_sale": "Sale",
       "product_variants": "Product variants",
       "media": {
@@ -452,6 +455,7 @@
       "product": "Product",
       "sku": "SKU",
       "price": "Price",
+      "product_price": "Product price",
       "quantity": "Quantity",
       "total": "Total",
       "total_refunded": "Refunded",
@@ -461,7 +465,9 @@
       "tracking_company": "Carrier",
       "tracking_number": "Tracking number",
       "subtotal": "Subtotal",
-      "total_duties": "Duties"
+      "total_duties": "Duties",
+      "label_text": "Label Text",
+      "QR_Code": "QR-Code"
     },
     "orders": {
       "title": "Order history",

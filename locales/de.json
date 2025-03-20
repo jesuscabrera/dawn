@@ -60,7 +60,7 @@
   "newsletter": {
     "label": "E-Mail",
     "success": "Danke für deine Anmeldung",
-    "button_label": "Abonnieren"
+    "button_label": "Subscribe"
   },
   "accessibility": {
     "skip_to_text": "Direkt zum Inhalt",
@@ -106,8 +106,10 @@
   },
   "products": {
     "product": {
-      "add_to_cart": "In den Warenkorb legen",
+      "add_to_cart": "In den Warenkorb",
       "description": "Beschreibung",
+      "characteristics": "Eingeschaften",
+      "reviews": "Bewertungen",
       "on_sale": "Sale",
       "quantity": {
         "label": "Anzahl",
@@ -160,13 +162,14 @@
       "choose_product_options": "Optionen für {{ product_name }} auswählen",
       "value_unavailable": "{{ option_value }} – nicht verfügbar",
       "variant_sold_out_or_unavailable": "Variante ausverkauft oder nicht verfügbar",
-      "inventory_in_stock": "Auf Lager",
+      "inventory_in_stock": "Sofort verfügbar, Lieferzeit: 1-2 Wochen",
       "inventory_in_stock_show_count": "{{ quantity }} auf Lager",
       "inventory_low_stock": "Niedriger Lagerbestand",
       "inventory_low_stock_show_count": "Niedriger Lagerbestand: {{ quantity }} verbleibend",
       "inventory_out_of_stock": "Nicht vorrätig",
       "inventory_out_of_stock_continue_selling": "Auf Lager",
       "sku": "SKU",
+      "product_nummer": "Produktnummber",
       "volume_pricing": {
         "title": "Volumenabhängige Preisgestaltung",
         "note": "Volumenabhängige Preisgestaltung verfügbar",
@@ -175,7 +178,7 @@
         "price_range": "{{ minimum }}–{{ maximum }}"
       },
       "product_variants": "Produktvarianten",
-      "taxes_included": "Inkl. Steuern.",
+      "taxes_included": "Preise exkl. MwSt. zzgl. Versandkosten",
       "duties_included": "Inkl. Zollgebühren.",
       "duties_and_taxes_included": "Inkl. Zollgebühren und Steuern."
     },
@@ -481,8 +484,10 @@
       "product": "Produkt",
       "sku": "SKU",
       "price": "Preis",
+      "QR_Code": "QR-Code",
+      "product_price": "Produktpreis",
       "quantity": "Menge",
-      "total": "Gesamtsumme",
+      "total": "Gesamtpreis",
       "fulfilled_at_html": "Ausgeführt am {{ date }}",
       "track_shipment": "Sendung nachverfolgen",
       "tracking_url": "Tracking-Link",
@@ -490,6 +495,7 @@
       "tracking_number": "Trackingnummer",
       "subtotal": "Zwischensumme",
       "total_duties": "Zollgebühren",
+      "label_text": "Beschriftungstext",
       "total_refunded": "Zurückerstattet"
     }
   },

@@ -1,0 +1,277 @@
+/* ==========================================================================
+    Custom Product Section Styles
+   ========================================================================== */
+
+/**
+ * This stylesheet provides the necessary styles for the custom product page,
+ * as defined in the provided design specifications.
+ * 
+ * - Defines styles for product titles, ratings, variant selection, and pricing.
+ * - Customizes the product options, summary section, and checkout elements.
+ * - Adjusts quantity selectors and add-to-cart button styles.
+ * - Customize the default shopify product gallery layout for tablet and larger screens.  
+ * 
+ */
+
+/* Global Product Container Styles */
+.custom-product .shopify-section {
+  margin-bottom: var(--custom-spacing-xl);
+}
+
+/* Product Title */
+.custom-product .product__title {
+  font-family: var(--custom-font-family);
+  font-size: var(--custom-font-heading-size);
+  line-height: var(--custom-font-heading-line-height);
+  font-weight: var(--custom-font-heading-weight);
+}
+
+/* Product Rating */
+.custom-product .rating-wrapper {
+  margin: var(--custom-spacing-lg) 0;
+}
+
+.custom-product .rating-count {
+  font-size: var(--custom-font-body-size);
+  color: var(--custom-color-light);
+  margin-left: var(--custom-spacing-sm);
+}
+
+/* Variant buttons */
+.custom-product .product-form__input--pill {
+  margin-bottom: var(--custom-spacing-lg);
+}
+
+.custom-product .product-form__input--pill input[type='radio'] + label {
+  border-radius: var(--custom-border-radius);
+}
+
+.custom-product .product-form__input--pill input[type='radio']:checked + label {
+  background-color: var(--custom-color-primary);
+  color: var(--custom-color-button-background);
+}
+
+.custom-product .product-form__input .form__label {
+  font-size: var(--custom-font-body-size);
+  line-height: var(--custom-font-body-line-height);
+  color: var(--custom-color-text);
+}
+
+.custom-product .variant-selects {
+  margin: 0;
+}
+
+/* Product Price */
+.custom-product .custom-price {
+  margin-top: 0;
+}
+
+/* Discount badge */
+.price__badge-sale {
+  font-size: 14px;
+  font-weight: bold;
+  background-color: var(--custom-color-price-sale);
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 3px;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+/* SKU Label */
+.sku-label {
+  font-weight: var(--custom-font-heading-weight);
+  color: var(--custom-color-text);
+}
+
+/* Product Options & Summary */
+.custom-product .option-group {
+  margin-bottom: var(--custom-spacing-lg);
+}
+
+.product__options-container,
+.product__summary-container {
+  padding: 12px 20px;
+  border: 1px solid var(--color-grey-dark, #848c8c);
+  border-radius: var(--border-radius-sm, 2px);
+  margin: 20px 0;
+  width: 100%;
+}
+
+.product__options-heading,
+.product__summary-heading {
+  margin: var(--custom-spacing-md) 0;
+  color: var(--custom-color-primary);
+  font-weight: var(--custom-font-heading-weight);
+  font-size: var(--custom-font-heading-size);
+  line-height: var(--custom-font-heading-line-height);
+}
+
+.product__summary-label,
+.product__option-label {
+  color: var(--custom-color-text);
+  font-size: var(--custom-font-body-size);
+  font-family: var(--custom-font-family);
+  font-style: normal;
+  font-weight: var(--custom-font-heading-weight);
+}
+
+.product__summary-label-light {
+  color: var(--custom-color-text);
+  font-family: var(--custom-font-family);
+  font-style: normal;
+  font-weight: var(--custom-font-body-weight-light);
+}
+
+.product__form-textarea,
+.product__options-select {
+  display: flex;
+  width: 100%;
+  padding: var(--custom-spacing-md);
+  color: var(--custom-color-text);
+  font-family: var(--custom-font-family);
+  font-style: normal;
+  font-weight: var(--custom-font-body-weight-light);
+}
+
+.product__options-select select {
+  width: 100%;
+  padding: var(--custom-spacing-sm);
+  text-align: center;
+}
+
+.custom-product .product__options-select option {
+  color: var(--custom-color-light);
+  font-family: var(--custom-font-family);
+  font-style: normal;
+  font-weight: var(--custom-font-body-weight-light);
+  font-size: var(--custom-font-heading-size);
+}
+
+.product__select-wrapper {
+  margin: 20px 0;
+}
+
+.product__summary-divider {
+  margin: 10px 0;
+}
+
+.product__summary-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 5px 0;
+}
+
+.product__summary-value {
+  text-align: right;
+}
+
+#product-options-checkbox {
+  width: var(--custom-nav-button-bg-size);
+  height: var(--custom-nav-button-bg-size);
+  min-width: var(--custom-nav-button-bg-size);
+  transform: translate(-5px, 5px);
+}
+
+/* Quantity & Add to Cart */
+.product__quantity-and-cart {
+  display: flex;
+  align-items: center;
+  gap: var(--custom-spacing-lg);
+  margin-top: var(--custom-spacing-lg);
+}
+
+.product__quantity-and-cart .custom-product_quantity_selector {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.buy-buttons {
+  flex: 1;
+}
+
+.buy-buttons .product-form {
+  margin: 0;
+}
+
+.buy-buttons .product-form__buttons {
+  max-width: 100%;
+}
+
+.buy-buttons .button {
+  background-color: var(--custom-color-primary);
+  color: var(--custom-color-button-background);
+}
+
+/* Offer Button Modal */
+.custom-product-popup-modal__button {
+  background: transparent;
+  border: 1px solid var(--custom-color-primary);
+  color: var(--custom-color-primary);
+  font-size: var(--custom-font-body-size);
+  padding: var(--custom-spacing-md) var(--custom-spacing-lg);
+  width: 100%;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: var(--border-radius-sm);
+}
+
+.custom-product-popup-modal__button:hover {
+  background: var(--custom-color-primary);
+  color: var(--custom-color-background);
+}
+
+/* Icons with Text */
+.custom-product .icon-with-text--vertical .icon-with-text__item {
+  margin-bottom: var(--custom-spacing-md);
+}
+
+.custom-product .product__info-container .icon-with-text {
+  margin: 0;
+}
+
+/* Product Gallery (Tablet & Up) */
+@media only screen and (min-width: 750px) {
+  .custom-product {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--custom-spacing-lg);
+  }
+
+  .custom-product .grid__item.product__media-wrapper,
+  .custom-product .product__info-wrapper {
+    flex: 1;
+    min-width: 50%;
+  }
+
+  .custom-product .product--small .thumbnail-list.slider--tablet-up .thumbnail-list__item {
+    transform: rotate(-90deg);
+    flex: 1 1 calc(20% - 0.8rem);
+  }
+
+  .custom-product .grid__item.product__media-wrapper .thumbnail-slider {
+    position: absolute;
+    top: 0;
+    transform: rotate(90deg);
+    width: 100%;
+    left: 0;
+    transform-origin: left top;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .custom-product .grid__item.product__media-wrapper {
+    position: relative;
+    padding-left: 100px;
+  }
+
+  .custom-product .thumbnail-list.slider--tablet-up li.thumbnail-list__item.slider__slide {
+    transform: rotate(-90deg);
+    width: calc(16.8% - 0.8rem);
+  }
+}

@@ -1,23 +1,4 @@
 {% comment %}
-  Custom Price Rendering for Shopify Theme
-
-  - Copied the original price section and created a new section called "custom-price" to
-    adapt the pricing display to match the provided design specifications.
-  - This approach follows best practices in Shopify development by:
-    - Keeping the original pricing structure intact for maintainability and future updates.
-    - Allowing flexibility to customize the price display without modifying core theme logic.
-    - Ensuring easier debugging and rollback options if future adjustments are needed.
-    - Preventing conflicts with theme updates or third-party app integrations.
-  - The "custom-price" section introduces:
-    - Adjusted styling and structure for improved UX based on the design.
-    - Explicit display of currency symbols and discount calculations.
-    - Grouped sale price and compare-at price for better readability.
-
-  This ensures a clean, maintainable, and scalable solution while preserving the default
-  pricing behavior as a fallback.
-
-
-  Original Comment from file:
   Renders a list of product's price (regular, sale)
 
   Accepts:
@@ -49,9 +30,9 @@
   assign money_price_min = price_min | money
   assign money_price_max = price_max | money
   if settings.currency_code_enabled
-    assign money_price = price | money_with_currency
-    assign money_price_min = price_min | money_with_currency
-    assign money_price_max = price_max | money_with_currency
+    assign money_price = price | money_without_currency
+    assign money_price_min = price_min | money_without_currency
+    assign money_price_max = price_max | money_without_currency
   endif
 
   if target == product and product.price_varies
@@ -109,23 +90,25 @@
           </span>
         {%- endif -%}
       </div>
-      <div class="price__sale">
+      <div class="product-card__price--sale">
+        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
+        <span class="price-item price-item--sale price-item--last">
+          {{ money_price }}
+          {{- cart.currency.symbol }}
+        </span>
         {%- unless product.price_varies == false and product.compare_at_price_varies %}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span>
-            <s class="price-item price-item--regular">
+            <s class="product-card__price--compare">
               {% if settings.currency_code_enabled %}
-                {{ compare_at_price | money_with_currency }}
+                {{ compare_at_price | money_without_currency }}
+                {{- cart.currency.symbol }}
               {% else %}
                 {{ compare_at_price | money }}
               {% endif %}
             </s>
           </span>
         {%- endunless -%}
-        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
-        <span class="price-item price-item--sale price-item--last">
-          {{ money_price }}
-        </span>
       </div>
       <small class="unit-price caption{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}">
         <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
@@ -143,13 +126,24 @@
       </small>
     </div>
     {%- if show_badges -%}
-      <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
-        {{ 'products.product.on_sale' | t }}
-      </span>
+      {% if product.compare_at_price > product.price %}
+        {% assign discount_amount = product.compare_at_price | minus: product.price %}
+        {% assign discount_percentage = discount_amount | times: 100 | divided_by: product.compare_at_price %}
 
-      <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
-        {{ 'products.product.sold_out' | t }}
-      </span>
+        <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
+          -{{ discount_percentage | round }}%
+        </span>
+      {% else %}
+        <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
+          {{ 'products.product.on_sale' | t }}
+        </span>
+      {% endif %}
+
+      {%- if product.available == false -%}
+        <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
+          {{ 'products.product.sold_out' | t }}
+        </span>
+      {%- endif -%}
     {%- endif -%}
   </div>
 {% endunless %}
