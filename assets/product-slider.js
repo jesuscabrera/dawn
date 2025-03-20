@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Success handler
   swiperScript.onload = function () {
-    initializeSwiper();
+    initializeSwipers();
   };
 
   // Error handler
@@ -28,62 +28,65 @@ document.addEventListener('DOMContentLoaded', function () {
     const fallbackScript = document.createElement('script');
     fallbackScript.src = 'https://unpkg.com/swiper@11/swiper-bundle.min.js';
     fallbackScript.async = true;
-    fallbackScript.onload = initializeSwiper;
+    fallbackScript.onload = initializeSwipers;
     document.head.appendChild(fallbackScript);
   };
 
   document.head.appendChild(swiperScript);
 });
 
-function initializeSwiper() {
-  new Swiper('.swiper', {
-    slidesPerView: 1.2,
-    spaceBetween: 12,
-    loop: false,
-    keyboard: {
-      enabled: true,
-      onlyInViewport: true,
-    },
+function initializeSwipers() {
+  // Find all product slider sections
+  const productSliders = document.querySelectorAll('.product-slider[data-section-id]');
 
-    breakpoints: {
-      360: {
-        // added breakpoint to inmprove user experience : nº slides to show
-        slidesPerView: 1.5,
-        spaceBetween: 24,
-        navigation: false,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
+  // Initialize each slider separately
+  productSliders.forEach(function (sliderSection) {
+    const sectionId = sliderSection.getAttribute('data-section-id');
+    const swiperElement = sliderSection.querySelector('.product-slider__swiper');
+
+    // Find navigation and pagination elements for this specific section
+    const nextButton = document.getElementById(`next-${sectionId}`);
+    const prevButton = document.getElementById(`prev-${sectionId}`);
+    const pagination = sliderSection.querySelector('.swiper-pagination');
+
+    // Initialize this specific Swiper instance
+    new Swiper(swiperElement, {
+      slidesPerView: 1.2,
+      spaceBetween: 12,
+      loop: false,
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+
+      navigation: {
+        nextEl: nextButton,
+        prevEl: prevButton,
+      },
+
+      pagination: {
+        el: pagination,
+        clickable: true,
+      },
+
+      breakpoints: {
+        360: {
+          slidesPerView: 1.5,
+          spaceBetween: 24,
+        },
+        768: {
+          slidesPerView: 3.5,
+          spaceBetween: 32,
+        },
+        990: {
+          slidesPerView: 4.2,
+          spaceBetween: 32,
+        },
+        1440: {
+          slidesPerView: 4.5,
+          spaceBetween: 32,
         },
       },
-      768: {
-        slidesPerView: 3.5,
-        spaceBetween: 32,
-        navigation: false,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-      },
-      990: {
-        // added breakpoint to inmprove user experience : nº slides to show
-        slidesPerView: 4.2,
-        spaceBetween: 32,
-        navigation: false,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-      },
-      1440: {
-        slidesPerView: 4.5,
-        spaceBetween: 32,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        pagination: false,
-      },
-    },
+    });
   });
 }

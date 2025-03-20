@@ -7,10 +7,13 @@
 {{ 'product-slider.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-slider.js' | asset_url }}" defer></script>
 
+{% assign section_id = section.id %}
+
 {% comment %} Section it only render if a collection is selected and has products {% endcomment %}
 {%- if section.settings.collection != blank and collections[section.settings.collection].products.size > 0 -%}
   <section
-    class="product-slider"
+    class="product-slider {% if section.settings.enable_hide_on_desktop %}hide-on-desktop{% endif %}"
+    data-section-id="{{ section.id }}"
     aria-label="{{ section.settings.title | escape }}"
   >
     <div class="product-slider__container">
@@ -49,6 +52,7 @@
       {% comment %} Navigation buttons (hidden on small screens) {% endcomment %}
       <nav class="product-slider__navigation" aria-label="Slider navigation">
         <button
+          id="prev-{{ section_id }}"
           class="swiper-button-prev"
           aria-label="Previous slide"
           type="button"
@@ -56,6 +60,7 @@
           <span class="visually-hidden">Previous products</span>
         </button>
         <button
+          id="next-{{ section_id }}"
           class="swiper-button-next"
           aria-label="Next slide"
           type="button"
@@ -99,6 +104,12 @@
       "type": "checkbox",
       "id": "show_rating",
       "label": "Show product rating",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_hide_on_desktop",
+      "label": "Hide on Desktop",
       "default": true
     }
   ],
